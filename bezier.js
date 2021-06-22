@@ -11,21 +11,33 @@ let minq=100;
 let a,b;
 let scaleeq=0;
 let result = [];
+let count = true;
+let drawButton;
 
 function setup(){
     cnv = createCanvas(600, 600);
     centerCanvas();
-    background(0);
+    background(30);
+    drawButton = createButton('Draw Bezier');
+    drawButton.id('draw');
+    drawButton.mousePressed(()=>{
+        count=false;
+        Bezier();
+        input.style.display = 'block';
+        send.style.display = 'block';
+    });
 }
 
 function mousePressed(){
     let xs = map(mouseX, 0, width, 0, 1);
     let ys = map(mouseY, 0, height, 1, 0);
-    points.push([xs,ys]);
+    if(count){
+        points.push([xs,ys]);
+    }
 }
 
 function draw(){
-    background(0);
+    background(30);
     stroke(255);
     for(let i = 0; i< points.length; i++){
         let px = map(points[i][0], 0,1,0,width);
